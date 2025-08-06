@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <header class="header-bar">
+        <a href="/" class="logo">
+            <img class="header-logo" alt="To Do List" src="./assets/TodoImage.png">
+            <span class="logo-text">do it;</span>
+        </a>
+    </header>
+
+    <section class="input-container">
+        <input id="inputBox" type="text" placeholder="할 일을 입력해주세요" />
+        <button id="addBtn">+ 추가하기</button>
+    </section>
+
+    <main class="main-content">
+        <div class="list-container">
+            <h2>TO DO</h2>
+            <ul id="todoList">
+                <li><input type="checkbox"><span>할 일 1</span></li>
+                <li><input type="checkbox"><span>할 일 2</span></li>
+                <li><input type="checkbox"><span>할 일 3</span></li>
+            </ul>
+        </div>
+        <div class="list-container">
+            <h2>DONE</h2>
+            <ul id="doneList"></ul>
+        </div>
+    </main>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
