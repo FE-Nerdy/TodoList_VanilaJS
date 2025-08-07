@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List 상세 페이지</title>
+    <link rel="stylesheet" href="css/detail.css" />
+</head>
+
+<body>
+    <header class="header-bar">
+        <a href="/" class="logo">
+            <img class="header-logo" alt="To Do List" src="./assets/TodoImage.png">
+            <span class="logo-text">do it;</span>
+        </a>
+    </header>
+
+    <main class="detail-container">
+        <div class="detail-top">
+            <input type="checkbox" id="statusCheckbox" />
+            <h1 id="title" class="title-text"></h1>
+        </div>
+
+        <div class="detail-body">
+            <div class="image">
+                <div class="preview" id="imgPreview">
+                    <span class="icon">＋</span>
+                </div>
+                <input type="file" id="imgInput" accept="image/*" />
+            </div>
+
+            <div class="memo-box">
+                <h3>Memo</h3>
+                <textarea id="memo" placeholder="메모를 입력하세요"></textarea>
+            </div>
+        </div>
+
+        <div class="detail-footer">
+            <button id="backBtn" class="btn back">← 목록으로</button>
+            <button id="saveBtn" class="btn save">✔️ 수정 완료</button>
+            <button id="deleteBtn" class="btn delete">✖️ 삭제하기</button>
+        </div>
+    </main>
+
+    <script src="./js/detail.js"></script>
+</body>
+
+</html>
