@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+
+.header-bar {
+    background: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.header-logo {
+    height: 1.5em;
+    width: auto;
+    margin-right: 0.5em;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: darkblue;
+}
