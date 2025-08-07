@@ -12,6 +12,7 @@ function addTask() {
     const li = document.createElement("li");
     const check = document.createElement("input");
     check.type = "checkbox";
+    check.className = "checkBoxClass";
     check.checked = false;
 
     const span = document.createElement("span");

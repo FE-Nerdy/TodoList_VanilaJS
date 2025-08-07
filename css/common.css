@@ -29,3 +29,32 @@
     font-weight: bold;
     color: darkblue;
 }
+
+.checkBoxClass, .list-container li input[type="checkbox"]{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.2em;
+    height: 1.2em;
+    border: 2px solid #35e085;
+    border-radius: 50%;
+    margin-right: 0.75em;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.checkBoxClass:checked, .list-container li input[type="checkbox"]:checked  {
+    background-color: #35e085;
+    border-color: #35e085;
+}
+
+.checkBoxClass:checked::after, .list-container li input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.9em;
+    color: white;
+}

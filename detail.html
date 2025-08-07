@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List 상세 페이지</title>
-    <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/detail.css" />
 </head>
 
@@ -19,14 +18,15 @@
 
     <main class="detail-container">
         <div class="detail-top">
-            <input type="checkbox" id="statusCheckbox" />
-            <h1 id="title" class="title-text"></h1>
+            <input type="checkbox" class="checkBoxClass" />
+            <h1 id="title" class="title-text">dummy Data</h1>
         </div>
 
         <div class="detail-body">
             <div class="image">
                 <div class="preview" id="imgPreview">
-                    <span class="icon">＋</span>
+                    <text id="imgBox">이미지를 업로드 하세요</text>
+                    <button class="icon">＋</button>
                 </div>
                 <input type="file" id="imgInput" accept="image/*" />
             </div>
