@@ -5,13 +5,18 @@ function toIndexPage() {
   location.href = "index.html";
 }
 
-// function renderImage() {
-//   if (item.image) {
-//     imgPreview.innerHTML = `<img src="${item.image}" alt="업로드된 이미지">`;
-//   } else {
-//     uploadBtn.addEventListener("click", () => imgInput.click());
-//   }
-// }
+function saveData() {
+  todoData[idx] = item;
+  localStorage.setItem("todoData", JSON.stringify(todoData));
+}
+
+function renderImage() {
+  if (item.image) {
+    imgPreview.innerHTML = `<img src="${item.image}" alt="업로드된 이미지">`;
+  } else {
+    uploadBtn.addEventListener("click", () => imgInput.click());
+  }
+}
 
 if (!itemId) {
   toIndexPage();
@@ -72,27 +77,24 @@ memoEl.addEventListener("input", () => {
   item.memo = memoEl.value;
 });
 
-// imgInput.addEventListener("change", (e) => {
-//   const file = e.target.files[0];
-//   if (!file) return;
-//   const reader = new FileReader();
-//   reader.onload = () => {
-//     item.image = reader.result;
-//     saveData();
-//     renderImage();
-//   };
-//   reader.readAsDataURL(file);
-// });
-
-uploadBtn.addEventListener("click", () => imgInput.click());
+imgInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    item.image = reader.result;
+    saveData()
+    renderImage();
+  };
+  reader.readAsDataURL(file);
+});
 
 backBtn.addEventListener("click", () => {
   toIndexPage();
 });
 
 saveBtn.addEventListener("click", () => {
-  todoData[idx] = item;
-  localStorage.setItem("todoData", JSON.stringify(todoData));
+  saveData()
   toIndexPage();
 });
 
