@@ -17,13 +17,17 @@ function addTask() {
 
     const span = document.createElement("span");
     span.textContent = newTask;
+    span.style.cursor = "pointer";
+    span.addEventListener("click", () => {
+      location.href = `detail.html?title=${encodeURIComponent(newTask)}`;
+    });
 
     li.appendChild(check);
     li.appendChild(span);
     todoList.appendChild(li);
   }
   inputBox.value = "";
-  saveData()
+  saveData();
 }
 
 function loadData() {
@@ -31,6 +35,13 @@ function loadData() {
   const doneData = localStorage.getItem("doneList");
   if (todoData) todoList.innerHTML = todoData;
   if (doneData) doneList.innerHTML = doneData;
+
+  todoList.querySelectorAll("li > span").forEach((el) => {
+    const txt = el.textContent;
+    el.addEventListener("click", () => {
+      location.href = `detail.html?title=${encodeURIComponent(txt)}`;
+    });
+  });
 }
 
 function saveData() {
@@ -38,33 +49,33 @@ function saveData() {
   localStorage.setItem("doneList", doneList.innerHTML);
 }
 
-document.addEventListener("DOMContentLoaded", loadData);
+loadData();
 
-addBtn.addEventListener("click", () => {
-  addTask();
-});
+addBtn.addEventListener("click", addTask);
 
 // 엔터키로도 추가
 inputBox.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") addBtn.click();
+  if (e.key === "Enter") addTask;
 });
 
-todoList.addEventListener("change", e => {
+todoList.addEventListener("change", (e) => {
   if (e.target.type === "checkbox") {
     e.target.checked = true;
     const li = e.target.closest("li");
     li.style.textDecoration = "line-through";
     doneList.appendChild(li);
+
+    saveData();
   }
-  saveData()
 });
 
-doneList.addEventListener("change", e => {
+doneList.addEventListener("change", (e) => {
   if (e.target.type === "checkbox") {
     e.target.checked = false;
     const li = e.target.closest("li");
     li.style.textDecoration = "none";
     todoList.appendChild(li);
+
+    saveData();
   }
-  saveData()
 });
