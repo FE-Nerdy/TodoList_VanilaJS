@@ -11,13 +11,28 @@ function saveData() {
 }
 
 function renderImage() {
+  imgPreview.querySelector("img")?.remove();
+  imgPreview.querySelector("#delImageBtn")?.remove();
+
   if (item.image) {
-    imgPreview.querySelector("img")?.remove();
     const img = document.createElement("img");
     img.src = item.image;
     img.alt = "업로드된 이미지";
     imgPreview.prepend(img);
+
     imgBox.style.display = "none";
+
+    const delImageBtn = document.createElement("button");
+    delImageBtn.textContent = "✖️";
+    delImageBtn.id = "delImageBtn";
+    imgPreview.append(delImageBtn);
+
+    delImageBtn.addEventListener("click", () => {
+      if (!confirm("정말 삭제하시겠습니까?")) return;
+      item.image = "";
+      saveData();
+      renderImage();
+    });
   } else {
     imgPreview.querySelector("img")?.remove();
     imgBox.style.display = "block";
@@ -49,6 +64,7 @@ const deleteBtn = document.getElementById("deleteBtn");
 titleEl.textContent = item.title;
 statusCheckbox.checked = item.done;
 memoEl.value = item.memo || "";
+
 renderImage();
 
 titleEl.style.cursor = "pointer";
