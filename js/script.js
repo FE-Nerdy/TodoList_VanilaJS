@@ -3,79 +3,86 @@ const addBtn = document.getElementById("addBtn");
 const todoList = document.getElementById("todoList");
 const doneList = document.getElementById("doneList");
 
+let todoData = JSON.parse(localStorage.getItem("todoData") || "[]");
+
 function addTask() {
   const newTask = inputBox.value.trim();
 
   if (inputBox.value.trim() === "") {
-    alert("Please enter a task.");
+    alert("할 일을 입력하세요.");
   } else {
+    const id = Date.now().toString();
+    todoData.push({ id, title: newTask, done: false, memo: "", image: "" });
+
     const li = document.createElement("li");
     const check = document.createElement("input");
     check.type = "checkbox";
     check.className = "checkBoxClass";
     check.checked = false;
+    check.dataset.id = id;
 
     const span = document.createElement("span");
     span.textContent = newTask;
     span.style.cursor = "pointer";
+    span.dataset.id = id;
     span.addEventListener("click", () => {
-      location.href = `detail.html?title=${encodeURIComponent(newTask)}`;
+      location.href = `detail.html?id=${id}`;
     });
 
-    li.appendChild(check);
-    li.appendChild(span);
+    li.appendChild(check, span);
     todoList.appendChild(li);
   }
   inputBox.value = "";
   saveData();
 }
 
-function loadData() {
-  const todoData = localStorage.getItem("todoList");
-  const doneData = localStorage.getItem("doneList");
-  if (todoData) todoList.innerHTML = todoData;
-  if (doneData) doneList.innerHTML = doneData;
+function renderData() {
+  todoList.innerHTML = "";
+  doneList.innerHTML = "";
 
-  todoList.querySelectorAll("li > span").forEach((el) => {
-    const txt = el.textContent;
-    el.addEventListener("click", () => {
-      location.href = `detail.html?title=${encodeURIComponent(txt)}`;
+  todoData.forEach((item) => {
+    const li = document.createElement("li");
+    const check = document.createElement("input");
+    check.type = "checkbox";
+    check.className = "checkBoxClass";
+    check.checked = item.done;
+    check.dataset.id = item.id;
+
+    const span = document.createElement("span");
+    span.textContent = item.title;
+    span.style.cursor = "pointer";
+    span.dataset.id = item.id;
+    span.addEventListener("click", () => {
+      location.href = `detail.html?id=${item.id}`;
     });
+
+    li.appendChild(check);
+    li.appendChild(span);
+    if (item.done) doneList.appendChild(li);
+    else todoList.appendChild(li);
   });
 }
 
 function saveData() {
-  localStorage.setItem("todoList", todoList.innerHTML);
-  localStorage.setItem("doneList", doneList.innerHTML);
+  localStorage.setItem("todoData", JSON.stringify(todoData));
+  renderData();
 }
 
-loadData();
+renderData();
 
 addBtn.addEventListener("click", addTask);
-
-// 엔터키로도 추가
 inputBox.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") addTask;
+  if (e.key === "Enter") addTask();
 });
 
-todoList.addEventListener("change", (e) => {
-  if (e.target.type === "checkbox") {
-    e.target.checked = true;
-    const li = e.target.closest("li");
-    li.style.textDecoration = "line-through";
-    doneList.appendChild(li);
-
-    saveData();
-  }
-});
-
-doneList.addEventListener("change", (e) => {
-  if (e.target.type === "checkbox") {
-    e.target.checked = false;
-    const li = e.target.closest("li");
-    li.style.textDecoration = "none";
-    todoList.appendChild(li);
-
-    saveData();
-  }
-});
+[todoList, doneList].forEach((list) =>
+  list.addEventListener("change", (e) => {
+    if (e.target.type === "checkbox") {
+      const id = e.target.dataset.id;
+      const item = todoData.find((x) => x.id === id);
+      item.done = e.target.checked;
+      saveData();
+      renderData();
+    }
+  })
+);
