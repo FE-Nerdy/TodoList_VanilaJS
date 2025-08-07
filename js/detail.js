@@ -12,9 +12,15 @@ function saveData() {
 
 function renderImage() {
   if (item.image) {
-    imgPreview.innerHTML = `<img src="${item.image}" alt="업로드된 이미지">`;
+    imgPreview.querySelector("img")?.remove();
+    const img = document.createElement("img");
+    img.src = item.image;
+    img.alt = "업로드된 이미지";
+    imgPreview.prepend(img);
+    imgBox.style.display = "none";
   } else {
-    uploadBtn.addEventListener("click", () => imgInput.click());
+    imgPreview.querySelector("img")?.remove();
+    imgBox.style.display = "block";
   }
 }
 
@@ -35,11 +41,10 @@ const titleEl = document.getElementById("title");
 const memoEl = document.getElementById("memo");
 const imgInput = document.getElementById("imgInput");
 const imgPreview = document.getElementById("imgPreview");
-const uploadBtn = document.querySelector(".uploadBtn");
+const uploadBtn = document.getElementById("uploadBtn");
 const backBtn = document.getElementById("backBtn");
 const saveBtn = document.getElementById("saveBtn");
 const deleteBtn = document.getElementById("deleteBtn");
-
 // init
 titleEl.textContent = item.title;
 statusCheckbox.checked = item.done;
@@ -83,7 +88,7 @@ imgInput.addEventListener("change", (e) => {
   const reader = new FileReader();
   reader.onload = () => {
     item.image = reader.result;
-    saveData()
+    saveData();
     renderImage();
   };
   reader.readAsDataURL(file);
@@ -93,8 +98,10 @@ backBtn.addEventListener("click", () => {
   toIndexPage();
 });
 
+uploadBtn.addEventListener("click", () => imgInput.click());
+
 saveBtn.addEventListener("click", () => {
-  saveData()
+  saveData();
   toIndexPage();
 });
 
