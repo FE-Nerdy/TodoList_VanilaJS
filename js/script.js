@@ -33,14 +33,23 @@ inputBox.addEventListener("keydown", (e) => {
   if (e.key === "Enter") addBtn.click();
 });
 
-// todoList.addEventListener("click", function (e) {
-//   if (e.target.tagName === "LI") {
-//     let li = e.target;
-//     doneList.appendChild(li);
-//     li.style.textDecoration = "line-through";
-//   }
-// });
+todoList.addEventListener("change", e => {
+  if (e.target.type === "checkbox") {
+    e.target.checked = true;
+    const li = e.target.closest("li");
+    li.style.textDecoration = "line-through";
+    doneList.appendChild(li);
+  }
+});
 
+doneList.addEventListener("change", e => {
+  if (e.target.type === "checkbox") {
+    e.target.checked = false;
+    const li = e.target.closest("li");
+    li.style.textDecoration = "none";
+    todoList.appendChild(li);
+  }
+});
 // function saveData() {
 //   localStorage.setItem("todoList", todoList.innerHTML);
 // }
