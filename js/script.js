@@ -1,7 +1,7 @@
 const inputBox = document.getElementById("inputBox");
 const addBtn = document.getElementById("addBtn");
-// const todoList = document.getElementById("todoList");
-// const doneList = document.getElementById("doneList");
+const todoList = document.getElementById("todoList");
+const doneList = document.getElementById("doneList");
 
 function addTask() {
   const newTask = inputBox.value.trim();
