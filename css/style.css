@@ -61,12 +61,17 @@
     padding: 0 20px;
 }
 
-.list-container { flex:1; }
+.list-container {
+    flex: 1;
+}
 
 .list-container h2 {
-  background:greenyellow; color:blue;
-  padding:5px 15px; border-radius:20px;
-  display:inline-block; margin-bottom:15px;
+    background: greenyellow;
+    color: blue;
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 15px;
 }
 
 .list-container ul {
@@ -74,10 +79,55 @@
     flex-direction: column;
     gap: 10px;
     padding: 20px;
-    background: #f9f9f9;
     border-radius: 10px;
     list-style: none;
     padding: 0;
+}
+
+.list-container li {
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #35e085;
+    background: #f1f8ca;
+    border-radius: 30px;
+}
+
+.list-container li input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.2em;
+    height: 1.2em;
+    border: 2px solid #35e085;
+    border-radius: 50%;
+    margin-right: 0.75em;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.list-container li input[type="checkbox"]:checked {
+    background-color: #35e085;
+    border-color: #35e085;
+}
+
+.list-container li input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.9em;
+    color: white;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: 2px solid var(--dark);
+    border-radius: 30px;
+    background: #fff;
 }
 
 li::before {
@@ -87,18 +137,8 @@ li::before {
     margin-right: 10px;
 }
 
-.list-container li {
-    padding: 10px;
-    border: 1px solid #35e085;
-    background:#f1f8ca;
-    border-radius:30px;
+li span::before {
+    content: "";
+    width: 8px;
+    display: inline-block;
 }
-
-li {
-  display:flex; align-items:center;
-  padding:10px 20px;
-  border:2px solid var(--dark);
-  border-radius:30px;
-  background:#fff;
-}
-li.done { background:var(--done-bg); border-color:var(--green); }
