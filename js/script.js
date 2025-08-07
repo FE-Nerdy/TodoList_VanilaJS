@@ -22,7 +22,22 @@ function addTask() {
     todoList.appendChild(li);
   }
   inputBox.value = "";
+  saveData()
 }
+
+function loadData() {
+  const todoData = localStorage.getItem("todoList");
+  const doneData = localStorage.getItem("doneList");
+  if (todoData) todoList.innerHTML = todoData;
+  if (doneData) doneList.innerHTML = doneData;
+}
+
+function saveData() {
+  localStorage.setItem("todoList", todoList.innerHTML);
+  localStorage.setItem("doneList", doneList.innerHTML);
+}
+
+document.addEventListener("DOMContentLoaded", loadData);
 
 addBtn.addEventListener("click", () => {
   addTask();
@@ -40,6 +55,7 @@ todoList.addEventListener("change", e => {
     li.style.textDecoration = "line-through";
     doneList.appendChild(li);
   }
+  saveData()
 });
 
 doneList.addEventListener("change", e => {
@@ -49,7 +65,5 @@ doneList.addEventListener("change", e => {
     li.style.textDecoration = "none";
     todoList.appendChild(li);
   }
+  saveData()
 });
-// function saveData() {
-//   localStorage.setItem("todoList", todoList.innerHTML);
-// }
