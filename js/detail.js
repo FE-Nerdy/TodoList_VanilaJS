@@ -56,6 +56,7 @@ const titleEl = document.getElementById("title");
 const memoEl = document.getElementById("memo");
 const imgInput = document.getElementById("imgInput");
 const imgPreview = document.getElementById("imgPreview");
+const imgBox = document.getElementById("imgBox");
 const uploadBtn = document.getElementById("uploadBtn");
 const backBtn = document.getElementById("backBtn");
 const saveBtn = document.getElementById("saveBtn");

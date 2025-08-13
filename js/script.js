@@ -29,7 +29,7 @@ function addTask() {
       location.href = `detail.html?id=${id}`;
     });
 
-    li.appendChild(check, span);
+    li.append(check, span);
     todoList.appendChild(li);
   }
   inputBox.value = "";
@@ -70,9 +70,18 @@ function saveData() {
 
 renderData();
 
+let composing = false;
+
+inputBox.addEventListener("compositionstart", () => (composing = true));
+inputBox.addEventListener("compositionend", () => (composing = false));
+
 addBtn.addEventListener("click", addTask);
 inputBox.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") addTask();
+  if (composing || e.isComposing || e.key === "Process") return;
+  if (e.key === "Enter") {
+    e.preventDefault();
+    addTask();
+  }
 });
 
 [todoList, doneList].forEach((list) =>
