@@ -61,4 +61,4 @@
 ---
 
 ### 데모 페이지
-[🔗 데모 링크](https://fe-nerdy.github.io/TodoList_VanilaJS/)
+[🔗 데모 링크](https://j-moment.github.io/TodoList_VanilaJS/)
